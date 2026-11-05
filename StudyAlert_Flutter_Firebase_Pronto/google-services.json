@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "14874410374",
+    "project_id": "studyalert-13e78",
+    "storage_bucket": "studyalert-13e78.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14874410374:android:06cfd0e658662619f20007",
+        "android_client_info": {
+          "package_name": "com.example.studyalert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-G2ccVbFypDzj-LxgCl_uZNt-auLyMYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
