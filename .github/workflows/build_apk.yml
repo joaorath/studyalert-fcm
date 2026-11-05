@@ -1,0 +1,55 @@
+
+name: Gerar APK StudyAlert
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: StudyAlert_Flutter_Firebase_Pronto
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Instalar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Instalar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Criar projeto Android
+        run: flutter create --project-name studyalert --org com.example --platforms android --no-pub .
+
+      - name: Configurar Firebase
+        run: |
+          if [ ! -s google-services.json ]; then
+            echo "ERRO: google-services.json nao encontrado!"
+            exit 1
+          fi
+          cp google-services.json android/app/google-services.json
+          python3 scripts/configurar_android.py
+
+      - name: Instalar dependencias
+        run: flutter pub get
+
+      - name: Gerar APK
+        run: flutter build apk --release
+
+      - name: Disponibilizar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: StudyAlert-APK
+          path: StudyAlert_Flutter_Firebase_Pronto/build/app/outputs/flutter-apk/app-release.apk
